@@ -1,0 +1,8 @@
+.menu-text{
+    text-align: right;
+    font-size: 13px;
+}
+
+.menu-text:hover{
+    cursor: pointer; 
+}

@@ -1,0 +1,37 @@
+.modal-history {
+    width: 320px;
+    padding-top: 200px;
+}
+
+.modal-history-items {
+    background-color: #202020; 
+    border: 0px;
+}
+
+.modal-history-header{
+    height: 50px;
+}
+
+.modal-history-body{
+    height: 220px;
+    padding: 5px;
+    overflow: auto;
+}
+
+.modal-history-footer{
+    height: 50px;
+}
+
+.modal-history-header p {
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.modal-history-body p {
+    text-align: center;
+    font-weight: 500; 
+}
+
+.modal-history-footer p:hover {
+    cursor: pointer; 
+}

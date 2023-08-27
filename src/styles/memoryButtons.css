@@ -1,0 +1,52 @@
+.memory-button-container{
+    padding: 0px;
+    margin: 0;
+} 
+
+.memory-button{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 13px;
+    height: 30px;
+}
+
+.memory-button p{
+    align-self: center;
+    text-align: center;
+    margin: 0px;
+    padding: 0px; 
+}
+
+.enabled:hover {
+    background-color: #272F34;
+    cursor: pointer; 
+}
+
+.disabled > p{
+    color: gray;
+}
+
+.container-memory-buttons-modal{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-right:5px;
+}
+
+.memory-button-modal{
+    display: flex;
+    justify-content: center;
+    background-color: #393939;
+    height: 30px;
+    width: 35px;
+    margin-right: 1px;
+}
+
+.memory-button-modal:hover{
+    cursor: pointer; 
+}
+
+.memory-button-modal p{
+    align-self: center;
+}

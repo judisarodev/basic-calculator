@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import { Container } from './components/Container';
+import { Title } from './components/Title';
+import { Display } from './components/Display';
+import { ConsoleProvider } from './context/ConsoleContext';
+import { ButtonsContainer } from './components/ButtonsContainer';
+import { ShowHistory } from './components/ShowHistory';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Title/>
+      <ShowHistory />
+      <ConsoleProvider>
+        <Display/>
+        <ButtonsContainer/>
+      </ConsoleProvider>
+    </Container>
   );
 }
 

@@ -1,0 +1,9 @@
+.modal-history-item{
+    height: 60px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.modal-history-item:hover{
+    background-color: #2D2D2D;
+}

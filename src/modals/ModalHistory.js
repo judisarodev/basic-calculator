@@ -4,47 +4,22 @@ import * as memory from '../managers/memoryManager';
 import { MyModal } from "./MyModal";
 import { ModalItem } from "./ModalItem";
 
-const ModalHistory = ({memoryValue, setMemoryValue, showModalHistory, setShowModalHistory}) => {
-
-    const [enoughtSize, setEnoughtSize] = useState(true);
-
-    const size = {
-        isEnought: true
-    }
-
-    const handleResize = () => {
-        if(window.innerWidth > 580 && window.innerHeight > 580){
-            size.isEnought = true;  
-            setEnoughtSize(true);
-        }else if(size.isEnought === true){
-            size.isEnought = false;  
-            setEnoughtSize(false);
-            alert("Tu dispositivo no tiene las especificaciones necesarias");
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize); 
-        }
-    }, []);
-
+const ModalHistory = ({memoryValue, setMemoryValue}) => {
     return(
-        <MyModal openModal={showModalHistory && enoughtSize}
+        <MyModal
                 textNoHistory={"No hay un valor en memoria"}
                 showTextNoHistory={typeof memoryValue === 'undefined'}
                 body={
-                    <ModalHistoryItem memoryValue={memoryValue} 
-                    setMemoryValue={setMemoryValue} 
-                    setShowModalHistory={setShowModalHistory} 
-                    textNoHistory={!memoryValue}/>}
-                    show={setShowModalHistory}
+                    <ModalHistoryItem 
+                        memoryValue={memoryValue} 
+                        setMemoryValue={setMemoryValue} 
+                    />
+                }
         />
     );
 }
 
-const ModalHistoryItem = ({memoryValue, setMemoryValue, setShowModalHistory}) => {
+const ModalHistoryItem = ({memoryValue, setMemoryValue}) => {
 
     const [onElement, setOnElement] = useState(false);
 

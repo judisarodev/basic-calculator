@@ -3,16 +3,13 @@ import { MyModal } from './MyModal';
 import { getArr } from "../managers/operationsManager";
 import { ModalItem } from "./ModalItem";
 
-const ModalEquationHistory = ({openModal, show}) => {
+const ModalEquationHistory = ({openModal}) => {
     return(
-    <>
         <MyModal 
-            openModal={openModal} 
             showTextNoHistory={getArr().length === 1} 
             textNoHistory={"No hay historial de ecuaciones"} 
-            body={<ModalEquationHistoryItem arr={getArr()}/>} 
-            show={show}/>
-    </>
+            body={<ModalEquationHistoryItem arr={getArr()}/>}
+        />
     );
 }
 

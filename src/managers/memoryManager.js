@@ -8,6 +8,7 @@ export function clear(){
 
 export function add(memory, value){
     memory = Number(memory);
+    let a = 1; 
     return memory += Number(value);
 }
 

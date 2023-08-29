@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import './../styles/menu.css';
-import { ModalEquationHistory } from "../modals/ModalEquationHistory";
+import { FragmentContext } from "../context/FragmentContext";
+
 const ShowHistory = () => {
-    const [showEquations, setShowEquations] = useState(false); 
+
+    const { setFragment, fragments } = React.useContext(FragmentContext);
 
     const toggle = () => {
-        setShowEquations(!showEquations);
+        setFragment(fragments.EQUATIONS_HISTORY);
     }
     
     return(
-        <div>
+        <div style={{padding: '5px'}}>
+            <p className='text-size-sm'>Calculadora Básica</p>
             <p className="menu-text" onClick={toggle}>Historial</p>
-            <ModalEquationHistory 
-                openModal={showEquations} 
-                body={"body"} 
-                show={toggle}/>
         </div>
     );
 }

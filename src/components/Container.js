@@ -1,9 +1,9 @@
 import React from "react";
-import { container } from '../styles/container.css';
+import '../styles/container.css';
 
 const Container = (props) => {
     return(
-        <div className="container">
+        <div className="container cal-container">
             {props.children}
         </div>
     );

@@ -3,14 +3,18 @@
     justify-content: center;
     align-items: center;
     height: 51px;
+    width: auto;
     border-radius: 5px;
     margin: 1px;
     cursor: pointer; 
     font-size: 15px;
 }
 
-.col-style > div{
+.row-style {
+    display: flex;
+    flex-direction: row;
     padding: 0px;
+    justify-content: space-around;
 }
 
 .equals-button{

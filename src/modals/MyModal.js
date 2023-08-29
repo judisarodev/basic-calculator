@@ -1,32 +1,30 @@
-import React from "react";
-import '../styles/modal.css';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import React, {useContext, useState} from "react";
 import '../styles/modal.css'
+import { FragmentContext } from "../context/FragmentContext";
 
-const MyModal = ({openModal, showTextNoHistory, textNoHistory, body, show}) => {
+const MyModal = ({showTextNoHistory, textNoHistory, body}) => {
+
+    const { setFragment, fragments } = useContext(FragmentContext);
     
     const closeModal = () => {
-        show(false);
+        setFragment(fragments.BTNS_GRID);
     }
 
     return(
-        <div className="modal-hisotry-container">
-            <Modal isOpen={openModal} className="modal-history">
-
-                <ModalHeader className="modal-history-items modal-history-header">
+            <div className="modal-history">
+                <div className="modal-history-header">
                     <p>{showTextNoHistory &&<span>{textNoHistory}</span>}</p>
-                </ModalHeader>
+                </div>
 
-                <ModalBody className="modal-history-items modal-history-body">
+                <div className="modal-history-body">
                     {!showTextNoHistory && body }
-                </ModalBody>
+                </div>
 
-                <ModalFooter className="modal-history-items modal-history-footer">
+                <div className="modal-history-footer">
                     <p style={{fontSize: '13px'}} onClick={closeModal}>Cerrar</p>
-                </ModalFooter>
-
-            </Modal>
-        </div>
+                </div>
+            </div>
+        
     );
 }
 

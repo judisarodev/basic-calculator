@@ -1,0 +1,21 @@
+.footer-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    padding: 30px;
+}
+
+.footer-link{
+    text-decoration: none;
+    color: white; 
+}
+
+.footer-link:hover {
+    color: aliceblue; 
+}
+
+.footer-text{
+    color: #9B9D9E;
+}

@@ -18,10 +18,12 @@ import {setUpFirstValue,
         valAbs} from "../managers/operationsManager";
 import * as memory from '../managers/memoryManager';
 import { MemoryButton } from "./MemoryButton";
+import { FragmentContext } from "../context/FragmentContext";
 
 const ButtonsGrid = ({showModalHistory, setShowModalHistory, memoryValue, setMemoryValue}) => {
 
     const { myConsole, setMyConsole, setMyTopConsole } = React.useContext(ConsoleContext);
+    const { setFragment, fragments } = React.useContext(FragmentContext);
 
     function setUpValues(value, replace) {
         if(getOperation()){
@@ -131,68 +133,58 @@ const ButtonsGrid = ({showModalHistory, setShowModalHistory, memoryValue, setMem
     }
 
     function onMH(){
-        setShowModalHistory(!showModalHistory);
+        if(typeof memoryValue !== 'undefined'){
+            setFragment(fragments.MEMORY_HISTORY);
+        }
     }
 
     return(
         <div>
-            <div className="row col-style">
-                <div className="col">
-                    <MemoryButton click={onMC} text={"MC"} status={checkMemoryValue()}/>
-                </div>
-                <div className="col">
-                    <MemoryButton click={onMR} text={"MR"} status={checkMemoryValue()}/>
-                </div>
-                <div className="col">
-                    <MemoryButton click={onMPlus} text={"M+"} /> 
-                </div>
-                <div className="col">
-                    <MemoryButton click={onMMinus} text={"M-"} />
-                </div>
-                <div className="col">
-                    <MemoryButton click={onMS} text={"MS"}/>
-                </div>
-                <div className="col">
-                    <MemoryButton click={onMH} text={"Mv"} status={checkMemoryValue()}/>
-                </div>
+            <div className="row-style">
+                <MemoryButton click={onMC} text={"MC"} status={checkMemoryValue()}/>
+                <MemoryButton click={onMR} text={"MR"} status={checkMemoryValue()}/>
+                <MemoryButton click={onMPlus} text={"M+"} /> 
+                <MemoryButton click={onMMinus} text={"M-"} />
+                <MemoryButton click={onMS} text={"MS"}/>
+                <MemoryButton click={onMH} text={"Mv"} status={checkMemoryValue()}/>
             </div>
 
-            <div className="row">
-                <Button value={"|x|"} isDark={true} onClickButton={getValAbs}/>
+            <div className="row-style">
+                <Button value={"| x |"} isDark={true} onClickButton={getValAbs}/>
                 <Button value={"CE"} isDark={true} onClickButton={onCE}/>
                 <Button value={"C"} isDark={true} onClickButton={onC}/>
                 <Button value={"Del"} isDark={true} onClickButton={onDel}/>
             </div>
 
-            <div className="row">
+            <div className="row-style">
                 <Button value={"^-1"} isDark={true} onClickButton={onOperation}/>
                 <Button value={"^2"} isDark={true} onClickButton={onOperation}/>
                 <Button value={"^0.5"} isDark={true} onClickButton={onOperation}/>
                 <Button value={"/"} isDark={true} onClickButton={onOperation}/>
             </div>
 
-            <div className="row">
+            <div className="row-style">
                 <Button value={"7"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"8"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"9"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"x"} isDark={true} onClickButton={onOperation}/>
             </div>
 
-            <div className="row">
+            <div className="row-style">
                 <Button value={"4"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"5"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"6"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"-"} isDark={true} onClickButton={onOperation}/>
             </div>
 
-            <div className="row">
+            <div className="row-style">
                 <Button value={"1"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"2"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"3"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"+"} isDark={true} onClickButton={onOperation}/>
             </div>
 
-            <div className="row">
+            <div className="row-style">
                 <Button value={"+/-"} isDark={false} onClickButton={onChangeSign}/>
                 <Button value={"0"} isDark={false} onClickButton={onNumber}/>
                 <Button value={"."} isDark={false} onClickButton={onNumber}/>

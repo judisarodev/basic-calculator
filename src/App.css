@@ -2,6 +2,14 @@
   color:white;
 }
 
+h1, h2, h3, h4, h5, h6{
+  color:#222529
+}
+
+.col{
+  padding: 0px;
+}
+
 .App {
   text-align: center;
 }
@@ -21,4 +29,8 @@
 .pd-h-5{
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+body{
+  overflow: auto;
 }

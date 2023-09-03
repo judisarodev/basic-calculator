@@ -12,7 +12,6 @@ const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
     const { myConsole, setMyConsole } = React.useContext(ConsoleContext);
 
     function checkMemoryValue(){
-        console.log(memoryValue);
         if (typeof memoryValue === "undefined") {
             return 2;
         }else{
@@ -30,7 +29,6 @@ const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
         }else{
             setMemoryValue(memory.save(myConsole));
         }
-        console.log(memoryValue);
     }
 
     function onMMinus(){

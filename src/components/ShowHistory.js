@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import './../styles/menu.css';
 import { FragmentContext } from "../context/FragmentContext";
+import './../styles/menu.css';
 
 const ShowHistory = () => {
-
+    
     const { setFragment, fragments } = React.useContext(FragmentContext);
-
+    
     const toggle = () => {
         setFragment(fragments.EQUATIONS_HISTORY);
     }

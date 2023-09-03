@@ -20,7 +20,7 @@ const Fragment = ({memoryValue, setMemoryValue}) => {
                     setMemoryValue={setMemoryValue}
                 />
             );
-        case fragments.EQUATIONS_HISTORY:
+        case fragments.MEMORY_HISTORY:
             return(
                 <ModalHistory 
                     showModalHistory={showModalHistory} 

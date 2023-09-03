@@ -3,7 +3,7 @@ import { MemoryDisplay } from './MemoryDisplay';
 import { ConsoleDisplay } from './ConsoleDisplay';
 import { ConsoleContext } from './../context/ConsoleContext'
 
-const Display = ({text}) => {
+const Display = () => {
 
     const { myTopConsole, myConsole } = React.useContext(ConsoleContext); 
 

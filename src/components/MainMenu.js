@@ -3,7 +3,6 @@ import '../styles/mainMenu.css'
 
 const MainMenu = () => {
     return(
-    <>
         <nav class="navbar navbar-dark bg-dark">
                 <ul class="navbar-nav menu">
                     <li class="nav-item active menu-item">
@@ -11,7 +10,7 @@ const MainMenu = () => {
                     </li>
                 </ul>
         </nav>
-    </>);
+    );
 }
 
 export { MainMenu }; 

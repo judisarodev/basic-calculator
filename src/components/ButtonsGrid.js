@@ -17,14 +17,6 @@ const ButtonsGrid = () => {
         }
     }, []);
 
-    function isValidOperator(value){
-        if(value === '+' || value === '-' || value === '*' || value === '/' || value === '^-1' || value === '^2' || value === '^0.5'){
-            return true;
-        }else{
-            return false; 
-        }
-    }
-
     function handleKey(e){
         if(Number(e.key)){
             setUpValues(e.key, false);
@@ -32,7 +24,7 @@ const ButtonsGrid = () => {
             onDel();
         }else if(e.keyCode === 13){
             onEquals();
-        }else if(isValidOperator(e.key)){
+        }else if(e.key==='+'||e.key==='-'||e.key==='*'||e.key==='/'||e.key==='^-1'||e.key==='^2'||e.key==='^0.5'){
             onOperation(e.key);
         }
     }
@@ -54,13 +46,12 @@ const ButtonsGrid = () => {
     
     function onOperation(e){
         let value = e;
+        const isExpo = arr.setUpOperation(value); 
      
         if(typeof e !== 'string'){
             value = e.target.textContent;
         }
 
-        const isExpo = arr.setUpOperation(value); 
-        
         setMyTopConsole(arr.getFirstValue() + value);
         setMyConsole(arr.getFirstValue());
 
@@ -68,8 +59,7 @@ const ButtonsGrid = () => {
             onEquals(); 
             console.log(arr.getArr());
             arr.setUpFirstValue(arr.getResult(arr.getPos()-1, true));
-        }
-        
+        }        
     }
 
     function onEquals(){

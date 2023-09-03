@@ -50,8 +50,8 @@ const ModalHistoryItem = ({memoryValue, setMemoryValue}) => {
                 <p style={{textAlign: 'right', paddingRight: '5px'}}>{memoryValue}</p>
                 {onElement && <div className="container-memory-buttons-modal" style={{display: 'flex', gap: '3px'}}>
                     <MemoryButton text={"MC"} status={3} click={onMc}/> 
-                    <MemoryButton text={"M+"} status={3} click={onMPlus} /> 
-                    <MemoryButton text={"M-"} status={3} click={onMMinus} />
+                    <MemoryButton text={"+1"} status={3} click={onMPlus} /> 
+                    <MemoryButton text={"-1"} status={3} click={onMMinus} />
                 </div>}
             </div>
         </ModalItem>

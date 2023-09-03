@@ -1,9 +1,9 @@
 const memoryCards = [
     {tab: "MC", description: "Elimina el elemento en memoria"}, 
-    {tab: "MR", description: "Recupera el elemento en memoria"}, 
-    {tab: "M+", description: "Adiciona al elemento en memoria el valor en consola. Si te encuentras en el Menú de memoria, le adiciona una unidad"}, 
-    {tab: "M-", description: "Substrae al elemento en memoria el valor en consola. Si te encuentras en el Menú de memoria, le substrae una unidad"}, 
-    {tab: "MS", description: "Guarda en memoria el valor en consola"}, 
+    {tab: "MR", description: "Recupera el almacenado"}, 
+    {tab: "M+", description: "Adiciona al elemento en memoria el valor en consola"}, 
+    {tab: "M-", description: "Substrae al elemento en memoria el valor en consola"}, 
+    {tab: "MS", description: "Almacena en memoria el valor en consola"}, 
     {tab: "Mv", description: "Muestra el menú de memoria, en donde se puede visualizar el valor almacenado y modificarlo"}
 ];
 

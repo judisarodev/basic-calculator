@@ -5,7 +5,7 @@ const Footer = () => {
     return(<>
         <div className="footer-container bg-dark">
             <FooterItem text={"Visita el proyecto en "} linkText={"GitHub"} link={"https://github.com/judisarodev/basic-calculator.git"}/>
-            <FooterItem text={"No te pierdas mi "} linkText={"portafolio"} link={"#"}/>
+            <FooterItem text={"No te pierdas mi "} linkText={"Portafolio"} link={"#"}/>
         </div>
     </>);
 }

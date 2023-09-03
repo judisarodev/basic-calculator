@@ -46,7 +46,7 @@ const ModalHistoryItem = ({memoryValue, setMemoryValue}) => {
 
     return (
         <ModalItem>
-            <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+            <div style={{height: '65px'}} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
                 <p style={{textAlign: 'right', paddingRight: '5px'}}>{memoryValue}</p>
                 {onElement && <div className="container-memory-buttons-modal">
                     <MemoryButton text={"MC"} status={3} click={onMc}/> 

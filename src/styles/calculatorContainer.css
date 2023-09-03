@@ -1,0 +1,15 @@
+.big-container{
+    display: flex;
+    height: 90vh;
+    min-height: 570px;
+    justify-content: center;
+}
+
+.cal-container {
+    align-self: center;
+    background-color: #1A212B;
+    width: 320px;
+    height: 530px;
+    border-radius: 5px;
+    padding: 0px;
+}

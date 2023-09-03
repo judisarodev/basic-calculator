@@ -15,3 +15,14 @@ code {
 p{
   margin: 0px;
 }
+
+::-webkit-scrollbar{
+  background-color: #202020;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #3B3B3B;
+  border: solid  5px #202020;
+  border-radius: 10px;
+}
+

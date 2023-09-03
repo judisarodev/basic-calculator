@@ -5,8 +5,7 @@ const Title = () => {
     return(
         <>
             <div className="title-container">
-                <hr />
-                <h5 style={{textAlign: 'center'}}>¿Cómo sacar mayor provecho de tu calculadora?</h5>
+                <h5 style={{textAlign: 'center'}}>Funcionalidades</h5>
                 <hr />
             </div>
             

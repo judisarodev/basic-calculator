@@ -7,10 +7,7 @@ const MainMenu = () => {
         <nav class="navbar navbar-dark bg-dark">
                 <ul class="navbar-nav menu">
                     <li class="nav-item active menu-item">
-                        <a class="nav-link">Calculadora </a>
-                    </li>
-                    <li class="nav-item menu-item">
-                        <a class="nav-link">Funciones</a>
+                        <a class="nav-link">Calculadora Básica</a>
                     </li>
                 </ul>
         </nav>

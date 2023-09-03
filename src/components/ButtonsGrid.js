@@ -1,37 +1,49 @@
-import React, {memo, useEffect, useState} from "react";
-import '../styles/buttons.css'
-import { Button } from "./Button";
+import React, {useEffect} from "react";
 import { ConsoleContext } from '../context/ConsoleContext'; 
-import {setUpFirstValue, 
-        setUpSecondValue, 
-        setUpOperation, 
-        setUpResult, 
-        getPos, 
-        isEmpty, 
-        getFirstValue, 
-        getSecondValue, 
-        getOperation, 
-        getResult,
-        getArr, 
-        delArr,
-        changeSign, 
-        valAbs} from "../managers/operationsManager";
-import * as memory from '../managers/memoryManager';
-import { MemoryButton } from "./MemoryButton";
-import { FragmentContext } from "../context/FragmentContext";
+import * as arr from "../managers/operationsManager";
+import { LightButton } from "./LightButton";
+import { AccentButton } from "./AccentButton";
+import { DarkButton } from "./DarkButton";
+import { RowGridButtons} from "./RowGridButtons";
 
-const ButtonsGrid = ({showModalHistory, setShowModalHistory, memoryValue, setMemoryValue}) => {
+const ButtonsGrid = () => {
 
     const { myConsole, setMyConsole, setMyTopConsole } = React.useContext(ConsoleContext);
-    const { setFragment, fragments } = React.useContext(FragmentContext);
+
+    useEffect(() => {
+        window.addEventListener('keyup', handleKey);
+        return () =>{
+            window.removeEventListener('keyup', handleKey);
+        }
+    }, []);
+
+    function isValidOperator(value){
+        if(value === '+' || value === '-' || value === '*' || value === '/' || value === '^-1' || value === '^2' || value === '^0.5'){
+            return true;
+        }else{
+            return false; 
+        }
+    }
+
+    function handleKey(e){
+        if(Number(e.key)){
+            setUpValues(e.key, false);
+        }else if(e.keyCode === 8){
+            onDel();
+        }else if(e.keyCode === 13){
+            onEquals();
+        }else if(isValidOperator(e.key)){
+            onOperation(e.key);
+        }
+    }
 
     function setUpValues(value, replace) {
-        if(getOperation()){
-            setUpSecondValue(value, replace);
-            setMyConsole(getSecondValue()); 
+        if(arr.getOperation()){
+            arr.setUpSecondValue(value, replace);
+            setMyConsole(arr.getSecondValue()); 
         }else{
-            setUpFirstValue(value, replace);
-            setMyConsole(getFirstValue()); 
+            arr.setUpFirstValue(value, replace);
+            setMyConsole(arr.getFirstValue()); 
         }
     }
 
@@ -41,157 +53,106 @@ const ButtonsGrid = ({showModalHistory, setShowModalHistory, memoryValue, setMem
     }
     
     function onOperation(e){
-        const value = e.target.textContent;
+        let value = e;
+     
+        if(typeof e !== 'string'){
+            value = e.target.textContent;
+        }
 
-        const isExpo = setUpOperation(value); 
+        const isExpo = arr.setUpOperation(value); 
         
-        setMyTopConsole(getFirstValue() + value);
-        setMyConsole(getFirstValue());
+        setMyTopConsole(arr.getFirstValue() + value);
+        setMyConsole(arr.getFirstValue());
 
         if(isExpo){
             onEquals(); 
-            console.log(getArr());
-            setUpFirstValue(getResult(getPos()-1, true));
+            console.log(arr.getArr());
+            arr.setUpFirstValue(arr.getResult(arr.getPos()-1, true));
         }
         
     }
 
     function onEquals(){
-        setUpResult();
-        const prevPos = getPos() -1; 
-        setMyTopConsole(getFirstValue(prevPos) + getOperation(prevPos) + getSecondValue(prevPos) + "=");
-        setMyConsole(getResult(prevPos));
+        arr.setUpResult();
+        const prevPos = arr.getPos() -1; 
+        setMyTopConsole(arr.getFirstValue(prevPos) + arr.getOperation(prevPos) + arr.getSecondValue(prevPos) + "=");
+        setMyConsole(arr.getResult(prevPos));
     }
 
     function onDel(){
-        if(isEmpty(getOperation())){
-            setUpFirstValue(getFirstValue().slice(0, -1), true);
-            setMyConsole(getFirstValue());
+        if(arr.isEmpty(arr.getOperation())){
+            arr.setUpFirstValue(arr.getFirstValue().slice(0, -1), true);
+            setMyConsole(arr.getFirstValue());
         }else{
-            setUpSecondValue(getSecondValue().slice(0, -1), true);
-            setMyConsole(getSecondValue());
+            arr.setUpSecondValue(arr.getSecondValue().slice(0, -1), true);
+            setMyConsole(arr.getSecondValue());
         }
     }
 
     function onC(){
-        setUpFirstValue("", true);
-        setUpSecondValue("", true);
-        setUpOperation("", true);
+        arr.delArr();   
         setMyConsole("");
         setMyTopConsole("");
     }
 
     function onCE(){
-        delArr();    
+        setUpValues("", true);
     }
 
     function onChangeSign(){
-        const value = changeSign(myConsole);
+        const value = arr.changeSign(myConsole);
         setUpValues(value, true);
     }
 
     function getValAbs(){
-        const value = valAbs(myConsole);
+        const value = arr.valAbs(myConsole);
         setUpValues(value, true);
     }
 
-    function checkMemoryValue(){
-        if (typeof memoryValue === "undefined") {
-            return 2;
-        }else{
-            return 1; 
-        }
-    }
-
-    function onMS(){
-        setMemoryValue(memory.save(myConsole));
-    }
-
-    function onMPlus(){
-        if(typeof memoryValue !== "undefined"){
-            setMemoryValue(memory.add(memoryValue, myConsole));    
-        }else{
-            setMemoryValue(memory.save(myConsole));
-        }
-        console.log(memoryValue);
-    }
-
-    function onMMinus(){
-        if(typeof memoryValue !== "undefined"){
-            setMemoryValue(memory.substract(memoryValue, myConsole));
-        }else{
-            setMemoryValue(memory.negative(myConsole));
-        }
-    }
-
-    function onMC(){
-        setMemoryValue(memory.clear());
-    }
-
-    function onMR(){
-        setMyConsole(memoryValue);
-    }
-
-    function onMH(){
-        if(typeof memoryValue !== 'undefined'){
-            setFragment(fragments.MEMORY_HISTORY);
-        }
-    }
-
     return(
-        <div>
-            <div className="row-style">
-                <MemoryButton click={onMC} text={"MC"} status={checkMemoryValue()}/>
-                <MemoryButton click={onMR} text={"MR"} status={checkMemoryValue()}/>
-                <MemoryButton click={onMPlus} text={"M+"} /> 
-                <MemoryButton click={onMMinus} text={"M-"} />
-                <MemoryButton click={onMS} text={"MS"}/>
-                <MemoryButton click={onMH} text={"Mv"} status={checkMemoryValue()}/>
-            </div>
+        <>
+             <RowGridButtons>
+                <DarkButton value={"| x |"} click={getValAbs}/>
+                <DarkButton value={"CE"} click={onCE}/>
+                <DarkButton value={"C"} click={onC}/>
+                <DarkButton value={"Del"} click={onDel}/>
+            </RowGridButtons>
+            
+            <RowGridButtons>
+                <DarkButton value={"^-1"} click={onOperation}/>
+                <DarkButton value={"^2"} click={onOperation}/>
+                <DarkButton value={"^0.5"} click={onOperation}/>
+                <DarkButton value={"/"} click={onOperation}/>
+            </RowGridButtons>
 
-            <div className="row-style">
-                <Button value={"| x |"} isDark={true} onClickButton={getValAbs}/>
-                <Button value={"CE"} isDark={true} onClickButton={onCE}/>
-                <Button value={"C"} isDark={true} onClickButton={onC}/>
-                <Button value={"Del"} isDark={true} onClickButton={onDel}/>
-            </div>
+            <RowGridButtons>
+                <LightButton value={"7"} click={onNumber}/>
+                <LightButton value={"8"} click={onNumber}/>
+                <LightButton value={"9"} click={onNumber}/>
+                <DarkButton value={"x"} click={onOperation}/>
+            </RowGridButtons>
 
-            <div className="row-style">
-                <Button value={"^-1"} isDark={true} onClickButton={onOperation}/>
-                <Button value={"^2"} isDark={true} onClickButton={onOperation}/>
-                <Button value={"^0.5"} isDark={true} onClickButton={onOperation}/>
-                <Button value={"/"} isDark={true} onClickButton={onOperation}/>
-            </div>
+            <RowGridButtons>
+                <LightButton value={"4"} click={onNumber}/>
+                <LightButton value={"5"} click={onNumber}/>
+                <LightButton value={"6"} click={onNumber}/>
+                <DarkButton value={"-"} click={onOperation}/>
+            </RowGridButtons>
 
-            <div className="row-style">
-                <Button value={"7"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"8"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"9"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"x"} isDark={true} onClickButton={onOperation}/>
-            </div>
+            <RowGridButtons>
+                <LightButton value={"1"} click={onNumber}/>
+                <LightButton value={"2"} click={onNumber}/>
+                <LightButton value={"3"} click={onNumber}/>
+                <DarkButton value={"+"} click={onOperation}/>
+            </RowGridButtons>
 
-            <div className="row-style">
-                <Button value={"4"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"5"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"6"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"-"} isDark={true} onClickButton={onOperation}/>
-            </div>
-
-            <div className="row-style">
-                <Button value={"1"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"2"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"3"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"+"} isDark={true} onClickButton={onOperation}/>
-            </div>
-
-            <div className="row-style">
-                <Button value={"+/-"} isDark={false} onClickButton={onChangeSign}/>
-                <Button value={"0"} isDark={false} onClickButton={onNumber}/>
-                <Button value={"."} isDark={false} onClickButton={onNumber}/>
-                <Button value={"="} onClickButton={onEquals}/>
-            </div>
-
-        </div>
+            <RowGridButtons>
+                <DarkButton value={"+/-"} onClickButton={onChangeSign}/>
+                <LightButton value={"0"} onClickButton={onNumber}/>
+                <LightButton value={"."} onClickButton={onNumber}/>
+                <AccentButton value={"="} onClickButton={onEquals}/>
+            </RowGridButtons>
+        </>
     );
 }
 

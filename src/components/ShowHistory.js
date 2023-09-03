@@ -11,8 +11,7 @@ const ShowHistory = () => {
     }
     
     return(
-        <div style={{padding: '5px'}}>
-            <p className='text-size-sm'>Calculadora Básica</p>
+        <div style={{padding: '10px 10px 20px 0px'}}>
             <p className="menu-text" onClick={toggle}>Historial</p>
         </div>
     );

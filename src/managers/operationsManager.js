@@ -36,11 +36,20 @@ export function getArr(){
 }
 
 export function getFirstValue(myPos = pos){
-    return arr[myPos].firstValue; 
+    if(myPos >= 0){
+        return arr[myPos].firstValue; 
+    }else{
+        return '0';
+    }
+    
 }
 
 export function getSecondValue(myPos = pos){
-    return arr[myPos].secondValue; 
+    if(myPos >= 0){
+        return arr[myPos].secondValue; 
+    }else{
+        return '0';
+    }
 }
 
 export function getOperation(myPos = pos){
@@ -54,15 +63,15 @@ export function getResult(myPos = pos){
 export function setUpFirstValue(value, replace){
     if(replace || (arr[pos].firstValue === "0" && value !== ".")){
         arr[pos].firstValue = value;
-    }else if(arr[pos].firstValue.length < 10){
+    }else{
         arr[pos].firstValue = arr[pos].firstValue + value;
     }
 }
 
 export function setUpSecondValue(value, replace = false){
-    if(replace || arr[pos].secondValue === "0"){
+    if(replace || arr[pos].secondValue === "0"  && value !== "." ){
         arr[pos].secondValue = value;
-    }else if(arr[pos].secondValue.length < 9){
+    }else{
         arr[pos].secondValue = arr[pos].secondValue + value;
     }
 }
@@ -89,7 +98,7 @@ export function setUpOperation(value, replace = false){
         if(isEmpty(arr[pos].firstValue) && pos-1 < 0){
             arr[pos].firstValue = '0';
         }
-    
+
         if(value.includes("^")){
             arr[pos].operation = "^";
             setUpSecondValue(value.replace("^",""), pos);
@@ -125,6 +134,9 @@ export function setUpResult(){
         case "x":
             result = multiply(a, b);
             break;
+        case "*":
+            result = multiply(a, b);
+            break;
         case "/":
             result = divide(a, b);
             break;
@@ -139,19 +151,22 @@ export function setUpResult(){
         result = Number(result);
         arr[pos].result = result.toFixed(3).toString();
     }else{
-        arr[pos].result = result.toString();
+        arr[pos].result = result;
     }
 
-    if(result.length > 12){
-        arr[pos].firstValue = "";
-        arr[pos].secondValue = "";
-        arr[pos].operation = "";
-        arr[pos].result = "Overfow";
+    if(pos-1 >= 0){
+        if(arr[pos].firstValue === arr[pos-1].firstValue &&
+            arr[pos].secondValue === arr[pos-1].secondValue &&
+            arr[pos].result === arr[pos-1].result){
+            arr.pop();
+            pos-=1; 
+        }
     }
 
     arr.push(returnEmptyEquation());
     pos+=1; 
 }
+
 
 const add = (a, b) => {
     const c = a + b;

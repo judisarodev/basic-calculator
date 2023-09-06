@@ -3,10 +3,10 @@ import '../styles/mainMenu.css'
 
 const MainMenu = () => {
     return(
-        <nav class="navbar navbar-dark bg-dark">
-                <ul class="navbar-nav menu">
-                    <li class="nav-item active menu-item">
-                        <a class="nav-link">Calculadora Básica</a>
+        <nav className="navbar navbar-dark bg-dark">
+                <ul className="navbar-nav menu">
+                    <li className="nav-item active menu-item">
+                        <a className="nav-link">Calculadora Básica</a>
                     </li>
                 </ul>
         </nav>

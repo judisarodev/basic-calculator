@@ -10,10 +10,10 @@ const HowToContainer = () => {
             <Title />
             <div className="row d-flex justify-content-center">
                 <div className="col-sm-12 col-md-6 d-flex justify-content-end">
-                    <HowToCard arr={cards.splitArray(cards.getMemoryCards())}/>
+                    <HowToCard arr={cards.getMemoryCards()}/>
                 </div>
                 <div className="col-sm-12 col-md-6 d-flex">
-                    <HowToCard arr={cards.splitArray(cards.getDelCards())}/>
+                    <HowToCard arr={cards.getDelCards()}/>
                 </div>
             </div>
         </div>

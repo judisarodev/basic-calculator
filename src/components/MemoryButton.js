@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import '../styles/memoryButtons.css';
+import React from "react";
+import { MemoryButtonEnabled } from "./MemoryButtonEnabled";
+import { MemoryButtonDisabled } from "./MemoryButtonDisabled";
 
-const MemoryButton = ({click, text, status = 1}) => {
-    return(
-        <div onClick={click}>
-            {status === 1 && <div className="memory-button enabled"><p>{text}</p></div>}
-            {status === 2 &&<div className="memory-button disabled"><p>{text}</p></div>}
-            {status === 3 && <div className="memory-button-modal"><p>{text}</p></div>}
-        </div>
-    );
-    
+const  buttonStyles =  {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    borderRadius: '5px',
+    fontSize: '13px',
+    height: '30px',
+    width: '50px',
+    border: '0px',
+    backgroundColor : '#1A212B'
 }
+
+const MemoryButton = ({click, text, isActive = true}) => {
+    return(<>
+        {isActive && <MemoryButtonEnabled click={click} text={text} buttonStyles={buttonStyles}/>}
+        {!isActive && <MemoryButtonDisabled click={click} text={text}  buttonStyles={buttonStyles}/>}
+    </>);
+};
 
 export { MemoryButton }; 

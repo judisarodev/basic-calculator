@@ -2,6 +2,7 @@
     display: flex;
     justify-content: right;
     padding: 0px 10px 0px 10px;
+    
 }
 
 .memory-display{    
@@ -13,17 +14,14 @@
     color: #A6A6A6;
     margin: 0px;
     padding: 0px;
-}
-
-.console-display{
-    margin-bottom: 40px;
-    
+    overflow-x: auto;
 }
 
 .console-display > p {
     margin: 0px;
     padding: 0px;
-    height: 45px;
+    height: 85px;
     align-self: flex-end;
     font-size: 45px;
+    overflow-x: auto;
 }

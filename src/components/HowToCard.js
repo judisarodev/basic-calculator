@@ -7,11 +7,11 @@ const HowToCard = ({arr}) => {
     const onSetTab = (e) => {
         e.preventDefault();
         const tabValue = e.target.textContent; 
-        setCurrentIndex(arr.tabs.indexOf(arr.tabs.find(item => item === tabValue)));
+        setCurrentIndex(arr.indexOf(arr.find(item => item.tab === tabValue)));
     }
 
     const getItemStatus = (item) => {
-        if(arr.tabs.indexOf(item) === currentIndex){
+        if(arr.indexOf(item) === currentIndex){
             return true; 
         }else{
             return false; 
@@ -20,16 +20,16 @@ const HowToCard = ({arr}) => {
 
     return(
         <>
-            <div class="card text-center" style={{width: '400px', margin: '10px'}}>
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs row">
-                        {arr.tabs.map((item) => {
-                            return(<HowToCardTabItem tabName={item} onSetTab={onSetTab} isActive={getItemStatus(item)} />)
+            <div className="card text-center" style={{width: '400px', margin: '10px'}}>
+                <div className="card-header">
+                    <ul className="nav nav-tabs card-header-tabs row">
+                        {arr.map((item) => {
+                            return(<HowToCardTabItem tabName={item.tab} myKey={item.key} onSetTab={onSetTab} isActive={getItemStatus(item)} />)
                         })}
                     </ul>
                 </div>
-                <div class="card-body">
-                    <HowToCardDescriptionItem description={arr.descriptions[currentIndex]}/>
+                <div className="card-body">
+                    <HowToCardDescriptionItem description={arr[currentIndex].description}/>
                 </div>
             </div>
         </>
@@ -41,15 +41,15 @@ const HowToCardTabItem = ({onSetTab, tabName, isActive}) => {
         <>
         {
             isActive &&
-            <li class="nav-item col" key={tabName}>
-                <a class="nav-link active" href="#" onClick={onSetTab}>{tabName}</a>
+            <li className="nav-item col">
+                <a className="nav-link active" href="#" onClick={onSetTab}>{tabName}</a>
             </li>
         }
             
         {
             !isActive &&
-            <li class="nav-item col" key={tabName}>
-                <a class="nav-link" style={{color: 'black'}} href="#" onClick={onSetTab}>{tabName}</a>
+            <li className="nav-item col">
+                <a className="nav-link" style={{color: 'black'}} href="#" onClick={onSetTab}>{tabName}</a>
             </li>
         }
         </>

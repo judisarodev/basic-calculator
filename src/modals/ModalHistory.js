@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { MemoryButton } from "../components/MemoryButton";
 import * as memory from '../managers/memoryManager';
 import { MyModal } from "./MyModal";
@@ -46,12 +46,12 @@ const ModalHistoryItem = ({memoryValue, setMemoryValue}) => {
 
     return (
         <ModalItem>
-            <div style={{height: '65px'}} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+            <div style={{height: '65px', display: 'flex', flexDirection: 'column', gap: '3px', padding: '3px'}} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
                 <p style={{textAlign: 'right', paddingRight: '5px'}}>{memoryValue}</p>
-                {onElement && <div className="container-memory-buttons-modal" style={{display: 'flex', gap: '3px'}}>
-                    <MemoryButton text={"MC"} status={3} click={onMc}/> 
-                    <MemoryButton text={"+1"} status={3} click={onMPlus} /> 
-                    <MemoryButton text={"-1"} status={3} click={onMMinus} />
+                {onElement && <div style={{display: 'flex', gap: '3px', alignSelf:'end'}}>
+                    <MemoryButton text={"MC"} click={onMc}/> 
+                    <MemoryButton text={"+1"} click={onMPlus} /> 
+                    <MemoryButton text={"-1"} click={onMMinus} />
                 </div>}
             </div>
         </ModalItem>

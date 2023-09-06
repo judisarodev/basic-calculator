@@ -18,14 +18,14 @@ const ButtonsGrid = () => {
     }, []);
 
     function handleKey(e){
-        if(Number(e.key)){
-            setUpValues(e.key, false);
+        if(Number(e.key) || e.key == '0'){
+            setUpValues(e.key, false);   
         }else if(e.keyCode === 8){
             onDel();
         }else if(e.keyCode === 13){
             onEquals();
         }else if(e.key==='+'||e.key==='-'||e.key==='*'||e.key==='/'||e.key==='^-1'||e.key==='^2'||e.key==='^0.5'){
-            onOperation(e.key);
+            setOperation(e.key);
         }
     }
 
@@ -41,32 +41,30 @@ const ButtonsGrid = () => {
 
     function onNumber(e){
         const value = e.target.textContent;
-        setUpValues(value, false);
+        setUpValues(value, false);   
     }
     
-    function onOperation(e){
-        let value = e;
+    function setOperation(value){
         const isExpo = arr.setUpOperation(value); 
      
-        if(typeof e !== 'string'){
-            value = e.target.textContent;
-        }
-
         setMyTopConsole(arr.getFirstValue() + value);
         setMyConsole(arr.getFirstValue());
 
         if(isExpo){
             onEquals(); 
-            console.log(arr.getArr());
             arr.setUpFirstValue(arr.getResult(arr.getPos()-1, true));
-        }        
+        }   
+    }
+
+    function onOperation(e){
+        const value = e.target.textContent;
+        setOperation(value); 
     }
 
     function onEquals(){
-        arr.setUpResult();
-        const prevPos = arr.getPos() -1; 
+        arr.setUpResult();const prevPos = arr.getPos() -1; 
         setMyTopConsole(arr.getFirstValue(prevPos) + arr.getOperation(prevPos) + arr.getSecondValue(prevPos) + "=");
-        setMyConsole(arr.getResult(prevPos));
+        setMyConsole(arr.getResult(prevPos));   
     }
 
     function onDel(){
@@ -137,10 +135,10 @@ const ButtonsGrid = () => {
             </RowGridButtons>
 
             <RowGridButtons>
-                <DarkButton value={"+/-"} onClickButton={onChangeSign}/>
-                <LightButton value={"0"} onClickButton={onNumber}/>
-                <LightButton value={"."} onClickButton={onNumber}/>
-                <AccentButton value={"="} onClickButton={onEquals}/>
+                <DarkButton value={"+/-"} click={onChangeSign}/>
+                <LightButton value={"0"} click={onNumber}/>
+                <LightButton value={"."} click={onNumber}/>
+                <AccentButton value={"="} click={onEquals}/>
             </RowGridButtons>
         </>
     );

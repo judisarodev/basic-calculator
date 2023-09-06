@@ -13,9 +13,9 @@ const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
 
     function checkMemoryValue(){
         if (typeof memoryValue === "undefined") {
-            return 2;
+            return false;
         }else{
-            return 1; 
+            return true; 
         }
     }
 
@@ -55,12 +55,12 @@ const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
 
     return(
         <RowGridButtons>
-            <MemoryButton click={onMC} text={"MC"} status={checkMemoryValue()}/>
-            <MemoryButton click={onMR} text={"MR"} status={checkMemoryValue()}/>
-            <MemoryButton click={onMPlus} text={"M+"} /> 
+            <MemoryButton click={onMC} text={"MC"} isActive={checkMemoryValue()}/>
+            <MemoryButton click={onMR} text={"MR"} isActive={checkMemoryValue()}/>
+            <MemoryButton click={onMPlus} text={"M+"}/> 
             <MemoryButton click={onMMinus} text={"M-"} />
             <MemoryButton click={onMS} text={"MS"}/>
-            <MemoryButton click={onMH} text={"Mv"} status={checkMemoryValue()}/>
+            <MemoryButton click={onMH} text={"Mv"} isActive={checkMemoryValue()}/>
         </RowGridButtons>
     );
 }

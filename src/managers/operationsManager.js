@@ -36,20 +36,11 @@ export function getArr(){
 }
 
 export function getFirstValue(myPos = pos){
-    if(myPos >= 0){
-        return arr[myPos].firstValue; 
-    }else{
-        return '0';
-    }
-    
+    return arr[myPos].firstValue; 
 }
 
 export function getSecondValue(myPos = pos){
-    if(myPos >= 0){
-        return arr[myPos].secondValue; 
-    }else{
-        return '0';
-    }
+    return arr[myPos].secondValue; 
 }
 
 export function getOperation(myPos = pos){
@@ -146,21 +137,12 @@ export function setUpResult(){
         default:
             result = a; 
     } 
-    
+
     if(!Number.isInteger(Number(result))){    
         result = Number(result);
         arr[pos].result = result.toFixed(3).toString();
     }else{
         arr[pos].result = result;
-    }
-
-    if(pos-1 >= 0){
-        if(arr[pos].firstValue === arr[pos-1].firstValue &&
-            arr[pos].secondValue === arr[pos-1].secondValue &&
-            arr[pos].result === arr[pos-1].result){
-            arr.pop();
-            pos-=1; 
-        }
     }
 
     arr.push(returnEmptyEquation());
@@ -184,8 +166,13 @@ const multiply = (a, b) => {
 }
 
 const divide = (a, b) => {
-    const c = a/b;
-    return c.toString();
+    if(b === 0){
+        alert("Error matemático, no puedes dividir un número entre cero");
+        return "";
+    }else{
+        const c = a/b;
+        return c.toString();
+    }
 }
 
 const riseTo = (a, b) => {

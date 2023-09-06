@@ -62,7 +62,8 @@ const ButtonsGrid = () => {
     }
 
     function onEquals(){
-        arr.setUpResult();const prevPos = arr.getPos() -1; 
+        arr.setUpResult();
+        const prevPos = arr.getPos() -1; 
         setMyTopConsole(arr.getFirstValue(prevPos) + arr.getOperation(prevPos) + arr.getSecondValue(prevPos) + "=");
         setMyConsole(arr.getResult(prevPos));   
     }

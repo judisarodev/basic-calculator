@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from "react";
+import React, {useContext, useRef} from "react";
 import '../styles/modal.css'
 import { FragmentContext } from "../context/FragmentContext";
 

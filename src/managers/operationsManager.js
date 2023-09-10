@@ -124,7 +124,6 @@ export function setUpResult() {
     arr[pos].operateEquation();
     arr.push(new Equation());
     pos += 1;
-    console.log(arr);
 }
 
 export function isEmpty(text) {

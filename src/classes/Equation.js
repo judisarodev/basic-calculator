@@ -90,9 +90,14 @@ export class Equation {
                 this._result = a;
         }
 
+        if(isNaN(this._result)){
+            alert("Error matemático, no has ingresado un número válido");
+            this._result = '0';
+        }
+
         if (!Number.isInteger(Number(this._result))) {
             const r = Number(this._result);
-            this._result = r.toFixed(3).toString();
+            this._result = Number(r.toFixed(3)).toString();
         }
     }
 }

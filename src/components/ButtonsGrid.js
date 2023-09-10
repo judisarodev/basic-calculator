@@ -18,12 +18,15 @@ const ButtonsGrid = () => {
     }, []);
 
     function handleKey(e){
+        console.log(e);
         if(Number(e.key) || e.key == '0'){
             setUpValues(e.key, false);   
         }else if(e.keyCode === 8){
             onDel();
         }else if(e.keyCode === 13){
             onEquals();
+        }else if(e.keyCode === 110){
+            setUpValues(e.key, false);   
         }else if(e.key==='+'||e.key==='-'||e.key==='*'||e.key==='/'||e.key==='^-1'||e.key==='^2'||e.key==='^0.5'){
             setOperation(e.key);
         }

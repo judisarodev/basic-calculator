@@ -52,13 +52,13 @@ const ButtonsGrid = () => {
 
         if(isExpo){
             onEquals(); 
-            arr.setUpFirstValue(arr.getResult(arr.getPos()-1, true));
         }   
     }
 
     function onOperation(e){
         const value = e.target.textContent;
-        setOperation(value); 
+        setOperation(value);
+
     }
 
     function onEquals(){
@@ -90,6 +90,7 @@ const ButtonsGrid = () => {
 
     function onChangeSign(){
         const value = arr.changeSign(myConsole);
+        setMyConsole("");
         setUpValues(value, true);
     }
 

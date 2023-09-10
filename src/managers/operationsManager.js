@@ -1,195 +1,139 @@
+import { Equation } from "../classes/Equation";
+
 let pos = 0;
+let arr = [new Equation()];
 
-let arr = [returnEmptyEquation()];
-
-export function delArr(){
-    pos = 0; 
-    arr = [returnEmptyEquation()];
+export function getPos() {
+    return pos;
 }
 
-export function delLastItemArr(){
-    arr.pop();
-    pos -= 1;
-    arr = [...arr, returnEmptyEquation()];
+export function getArr() {
+    return arr;
 }
 
-export function valAbs(value){
-    value = Number(value);
-    if(value >= 0){
-        return value + ''; 
-    }else{
-        return (-value) + '';
-    }
+export function delArr() {
+    pos = 0;
+    arr = [new Equation];
 }
 
-export function changeSign(value){
-    value = Number(value);
-    return -value + '';
+export function getFirstValue(myPos = pos) {
+    return arr[myPos].firstValue;
 }
 
-export function getPos(){
-    return pos; 
+export function getSecondValue(myPos = pos) {
+    return arr[myPos].secondValue;
 }
 
-export function getArr(){
-    return arr; 
+export function getOperation(myPos = pos) {
+    return arr[myPos].operation;
 }
 
-export function getFirstValue(myPos = pos){
-    return arr[myPos].firstValue; 
+export function getResult(myPos = pos) {
+    return arr[myPos].result;
 }
 
-export function getSecondValue(myPos = pos){
-    return arr[myPos].secondValue; 
+export function setFirstValue(value) {
+    arr[pos].firstValue = value;
 }
 
-export function getOperation(myPos = pos){
-   return arr[myPos].operation; 
+export function setSecondValue(value) {
+    arr[pos].secondValue = value;
 }
 
-export function getResult(myPos = pos){
-    return arr[myPos].result; 
+export function setOperation(value) {
+    arr[pos].operation = value;
 }
 
-export function setUpFirstValue(value, replace){
-    if(replace || (arr[pos].firstValue === "0" && value !== ".")){
-        arr[pos].firstValue = value;
-    }else{
-        arr[pos].firstValue = arr[pos].firstValue + value;
-    }
-}
-
-export function setUpSecondValue(value, replace = false){
-    if(replace || arr[pos].secondValue === "0"  && value !== "." ){
-        arr[pos].secondValue = value;
-    }else{
-        arr[pos].secondValue = arr[pos].secondValue + value;
-    }
-}
-
-export function isEmpty(text) {
-    if(text.length === 0){
-        return true; 
+function isThereAPreviousPosition(){
+    if(pos - 1 >= 0){
+        return true;
     }else{
         return false; 
     }
 }
 
-export function setUpOperation(value, replace = false){
-        if(!isEmpty(arr[pos].secondValue) && !replace){
-            setUpResult(arr);
-            arr[pos].firstValue = arr[pos-1].result;
-            arr[pos].operation = value  ;
-        }
-    
-        if(isEmpty(arr[pos].firstValue) && pos-1 >= 0 && !replace){
-            arr[pos].firstValue = arr[pos-1].result;
-        }
-    
-        if(isEmpty(arr[pos].firstValue) && pos-1 < 0){
-            arr[pos].firstValue = '0';
-        }
+export function setUpFirstValue(value, replace) {
+    let previousResult;
 
-        if(value.includes("^")){
-            arr[pos].operation = "^";
-            setUpSecondValue(value.replace("^",""), pos);
-            return true; 
-        }else{
-            arr[pos].operation = value;
-        }    
-    
-}   
-
-export function setUpResult(){
-
-    if(isEmpty(arr[pos].secondValue) && !isEmpty(arr[pos].operation)){
-        arr[pos].secondValue = arr[pos].firstValue;
+    if(isThereAPreviousPosition()){
+        previousResult = getResult(pos-1);
     }
 
-    if(isEmpty(arr[pos].firstValue) && pos-1 >= 0){
-        arr[pos].firstValue = arr[pos-1].result; 
-    }
-
-    const a = Number(arr[pos].firstValue);
-    const b = Number(arr[pos].secondValue); 
-    
-    let result = 0; 
-
-    switch(arr[pos].operation){
-        case "+":
-            result = add(a, b);
-            break;
-        case "-":
-            result = subtract(a, b);
-            break;
-        case "x":
-            result = multiply(a, b);
-            break;
-        case "*":
-            result = multiply(a, b);
-            break;
-        case "/":
-            result = divide(a, b);
-            break;
-        case "^": 
-            result = riseTo(a, b);
-            break;
-        default:
-            result = a; 
+    if (!replace || (getFirstValue() === "0" && value !== ".") && previousResult !== value) {
+        setFirstValue(getFirstValue() + value);
+    }else{
+        setFirstValue(value);
     } 
-
-    if(!Number.isInteger(Number(result))){    
-        result = Number(result);
-        arr[pos].result = result.toFixed(3).toString();
-    }else{
-        arr[pos].result = result;
-    }
-
-    arr.push(returnEmptyEquation());
-    pos+=1; 
 }
 
-
-const add = (a, b) => {
-    const c = a + b;
-    return c.toString();
-}
-
-const subtract = (a, b) => {
-    const c = a -b;
-    return c.toString();
-}
-
-const multiply = (a, b) => {
-    const c = a*b; 
-    return c.toString();
-}
-
-const divide = (a, b) => {
-    if(b === 0){
-        alert("Error matemático, no puedes dividir un número entre cero");
-        return "";
-    }else{
-        const c = a/b;
-        return c.toString();
+export function setUpSecondValue(value, replace) {
+    if (replace || getSecondValue() === "0" && value !== ".") {
+        setSecondValue(value);
+    } else {
+        setSecondValue(getSecondValue() + value);
     }
 }
 
-const riseTo = (a, b) => {
-    const c = Math.pow(a, b);
-    return c.toString();
-}
-
-const changeSimbol = (a) => {
-    const c = a * (-1);
-    return c.toString(); 
-}
-
-export function returnEmptyEquation(){
-    return {
-        firstValue: "", 
-        secondValue: "", 
-        operation: "",
-        result: "", 
+export function isEmpty(text) {
+    if (text.length === 0) {
+        return true;
+    } else {
+        return false;
     }
+}
+
+export function setUpOperation(value) {
+
+    if(isThereAPreviousPosition() && isEmpty(getFirstValue())){
+        setFirstValue(getResult(pos - 1));
+    }
+
+    if (!isEmpty(getSecondValue())) {
+        setUpResult();
+        setFirstValue(getResult(pos - 1));
+    }
+
+    if (isEmpty(getFirstValue()) && pos - 1 < 0) {
+        setFirstValue("0");
+    }
+
+    if (value.includes("^")) {
+        setOperation("^");
+        setSecondValue(value.replace("^", ""));
+        return true; 
+    }
+    
+    setOperation(value);
+}
+
+export function setUpResult() {
+
+    if (isEmpty(getSecondValue()) && !isEmpty(getOperation())) {
+        setSecondValue(getFirstValue);
+    }
+
+    if (isEmpty(getSecondValue()) && isEmpty(getOperation()) && isThereAPreviousPosition()) {
+        setOperation(getOperation(pos -1));
+        setSecondValue(getSecondValue(pos - 1));
+    }   
+    
+    arr[pos].operateEquation();
+    arr.push(new Equation());
+    pos += 1;
+    console.log(arr);
+}
+
+export function valAbs(value) {
+    value = Number(value);
+    if (value >= 0) {
+        return value + '';
+    } else {
+        return (-value) + '';
+    }
+}
+
+export function changeSign(value) {
+    let v = Number(value);
+    v = -v;
+    return v;
 }

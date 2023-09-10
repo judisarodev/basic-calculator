@@ -13,7 +13,7 @@ export function getArr() {
 
 export function delArr() {
     pos = 0;
-    arr = [new Equation];
+    arr = [new Equation()];
 }
 
 export function getFirstValue(myPos = pos) {
@@ -69,7 +69,7 @@ export function setUpFirstValue(value, replace) {
         previousResult = getResult(pos-1);
     }
 
-    if (!replace || (getFirstValue() === "0" && value !== ".") && previousResult !== value) {
+    if (!replace || (getFirstValue() === "0" && value !== "." && previousResult !== value)) {
         setFirstValue(getFirstValue() + value);
     }else{
         setFirstValue(value);
@@ -77,7 +77,7 @@ export function setUpFirstValue(value, replace) {
 }
 
 export function setUpSecondValue(value, replace) {
-    if (replace || getSecondValue() === "0" && value !== ".") {
+    if (replace || (getSecondValue() === "0" && value !== ".")) {
         setSecondValue(value);
     } else {
         setSecondValue(getSecondValue() + value);

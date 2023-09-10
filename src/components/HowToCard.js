@@ -23,9 +23,9 @@ const HowToCard = ({arr}) => {
             <div className="card text-center" style={{width: '400px', margin: '10px'}}>
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs row">
-                        {arr.map((item) => {
-                            return(<HowToCardTabItem tabName={item.tab} myKey={item.key} onSetTab={onSetTab} isActive={getItemStatus(item)} />)
-                        })}
+                        {arr.map((item) =><HowToCardTabItem 
+                                tabName={item.tab} key={item.key} onSetTab={onSetTab} isActive={getItemStatus(item)} />)
+                        }
                     </ul>
                 </div>
                 <div className="card-body">
@@ -42,14 +42,14 @@ const HowToCardTabItem = ({onSetTab, tabName, isActive}) => {
         {
             isActive &&
             <li className="nav-item col">
-                <a className="nav-link active" href="#" onClick={onSetTab}>{tabName}</a>
+                <a className="nav-link active" onClick={onSetTab}>{tabName}</a>
             </li>
         }
             
         {
             !isActive &&
             <li className="nav-item col">
-                <a className="nav-link" style={{color: 'black'}} href="#" onClick={onSetTab}>{tabName}</a>
+                <a className="nav-link" style={{color: 'black'}} onClick={onSetTab}>{tabName}</a>
             </li>
         }
         </>

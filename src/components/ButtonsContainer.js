@@ -4,6 +4,7 @@ import { Fragment } from "./Fragment";
 
 const ButtonsContainer = () => {
     const [memoryValue, setMemoryValue] = useState();
+
     return(
         <>
             <MemoryButtonsGrid memoryValue={memoryValue} setMemoryValue={setMemoryValue}/>

@@ -4,6 +4,7 @@ import { MemoryButton } from "./MemoryButton";
 import { FragmentContext } from "../context/FragmentContext";
 import { ConsoleContext } from "../context/ConsoleContext";
 import { RowGridButtons } from "./RowGridButtons";
+import { saveValue } from '../managers/operationsManager';
 
 const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
 
@@ -45,6 +46,7 @@ const MemoryButtonsGrid = ({memoryValue, setMemoryValue}) => {
 
     function onMR(){
         setMyConsole(memoryValue);
+        saveValue(memoryValue, true);
     }
 
     function onMH(){

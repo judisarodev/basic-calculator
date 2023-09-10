@@ -32,15 +32,15 @@ export function getResult(myPos = pos) {
     return arr[myPos].result;
 }
 
-export function setFirstValue(value) {
+function setFirstValue(value) {
     arr[pos].firstValue = value;
 }
 
-export function setSecondValue(value) {
+function setSecondValue(value) {
     arr[pos].secondValue = value;
 }
 
-export function setOperation(value) {
+function setOperation(value) {
     arr[pos].operation = value;
 }
 
@@ -49,6 +49,16 @@ function isThereAPreviousPosition(){
         return true;
     }else{
         return false; 
+    }
+}
+
+export function saveValue(value, replace){
+    if(getOperation()){
+        setUpSecondValue(value, replace);
+        return getSecondValue();
+    }else{
+        setUpFirstValue(value, replace);
+        return getFirstValue(); 
     }
 }
 
@@ -74,25 +84,18 @@ export function setUpSecondValue(value, replace) {
     }
 }
 
-export function isEmpty(text) {
-    if (text.length === 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 export function setUpOperation(value) {
-
+    
     if(isThereAPreviousPosition() && isEmpty(getFirstValue())){
         setFirstValue(getResult(pos - 1));
     }
-
+    
     if (!isEmpty(getSecondValue())) {
         setUpResult();
         setFirstValue(getResult(pos - 1));
     }
-
+    
     if (isEmpty(getFirstValue()) && pos - 1 < 0) {
         setFirstValue("0");
     }
@@ -107,12 +110,13 @@ export function setUpOperation(value) {
 }
 
 export function setUpResult() {
-
+    
     if (isEmpty(getSecondValue()) && !isEmpty(getOperation())) {
-        setSecondValue(getFirstValue);
+        setSecondValue(getFirstValue());
     }
-
+    
     if (isEmpty(getSecondValue()) && isEmpty(getOperation()) && isThereAPreviousPosition()) {
+        setFirstValue(getResult(pos -1));
         setOperation(getOperation(pos -1));
         setSecondValue(getSecondValue(pos - 1));
     }   
@@ -121,6 +125,14 @@ export function setUpResult() {
     arr.push(new Equation());
     pos += 1;
     console.log(arr);
+}
+
+export function isEmpty(text) {
+    if (text.length === 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export function valAbs(value) {

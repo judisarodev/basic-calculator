@@ -8,23 +8,15 @@ import { FragmentContext } from "../context/FragmentContext";
 const Fragment = ({memoryValue, setMemoryValue}) => {
 
     const { fragment, fragments } = React.useContext(FragmentContext);
-    const [showModalHistory, setShowModalHistory] = React.useState(false);
 
     switch(fragment){
         case fragments.BTNS_GRID:
             return(          
-                <ButtonsGrid 
-                    showModalHistory={showModalHistory} 
-                    setShowModalHistory={setShowModalHistory} 
-                    memoryValue={memoryValue}
-                    setMemoryValue={setMemoryValue}
-                />
+                <ButtonsGrid memoryValue={memoryValue}/>
             );
         case fragments.MEMORY_HISTORY:
             return(
                 <ModalHistory 
-                    showModalHistory={showModalHistory} 
-                    setShowModalHistory={setShowModalHistory}
                     memoryValue={memoryValue}
                     setMemoryValue={setMemoryValue}
                 />

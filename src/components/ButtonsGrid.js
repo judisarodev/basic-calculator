@@ -30,13 +30,7 @@ const ButtonsGrid = () => {
     }
 
     function setUpValues(value, replace) {
-        if(arr.getOperation()){
-            arr.setUpSecondValue(value, replace);
-            setMyConsole(arr.getSecondValue()); 
-        }else{
-            arr.setUpFirstValue(value, replace);
-            setMyConsole(arr.getFirstValue()); 
-        }
+        setMyConsole(arr.saveValue(value, replace)); 
     }
 
     function onNumber(e){
